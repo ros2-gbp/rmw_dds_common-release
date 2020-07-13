@@ -14,7 +14,7 @@ tracks:
       :{release_inc}
     devel_branch: null
     last_version: 1.0.1
-    name: upstream
+    name: rmw_dds_common
     patches: null
     release_inc: '1'
     release_repo_url: https://github.com/ros2-gbp/rmw_dds_common-release.git
@@ -38,7 +38,7 @@ tracks:
       :{release_inc}
     devel_branch: null
     last_version: 1.0.1
-    name: upstream
+    name: rmw_dds_common
     patches: null
     release_inc: '2'
     release_repo_url: https://github.com/ros2-gbp/rmw_dds_common-release.git
