@@ -66,7 +66,7 @@ tracks:
       :{release_inc} --os-name fedora
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc} --os-name rhel
-    devel_branch: null
+    devel_branch: master
     last_version: 1.2.1
     name: rmw_dds_common
     patches: null
