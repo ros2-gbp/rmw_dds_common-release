@@ -1,3 +1,26 @@
+## rmw_dds_common (rolling) - 4.0.0-1
+
+The packages in the `rmw_dds_common` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --track rolling --rosdistro rolling rmw_dds_common` on `Tue, 01 Jul 2025 15:30:53 -0000`
+
+The `rmw_dds_common` package was released.
+
+Version of package(s) in repository `rmw_dds_common`:
+
+- upstream repository: https://github.com/ros2/rmw_dds_common.git
+- release repository: https://github.com/ros2-gbp/rmw_dds_common-release.git
+- rosdistro version: `3.3.0-1`
+- old version: `3.3.0-1`
+- new version: `4.0.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rmw_dds_common (rolling) - 3.3.0-1
 
 The packages in the `rmw_dds_common` repository were released into the `rolling` distro by running `/home/cottsay/infra_ws/install/bloom/bin/bloom-release rmw_dds_common -r rolling` on `Fri, 25 Apr 2025 19:10:21 -0000`
