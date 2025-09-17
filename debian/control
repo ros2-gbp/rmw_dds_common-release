@@ -1,0 +1,12 @@
+Source: ros-kilted-rmw-dds-common
+Section: misc
+Priority: optional
+Maintainer: Ivan Paunovic <ivanpauno@ekumenlabs.com>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake, ros-kilted-ament-cmake-gmock <!nocheck>, ros-kilted-ament-lint-auto <!nocheck>, ros-kilted-ament-lint-common <!nocheck>, ros-kilted-osrf-testing-tools-cpp <!nocheck>, ros-kilted-performance-test-fixture <!nocheck>, ros-kilted-rcpputils, ros-kilted-rcutils, ros-kilted-rmw, ros-kilted-rmw-security-common, ros-kilted-rosidl-default-generators, ros-kilted-rosidl-runtime-c, ros-kilted-rosidl-runtime-cpp, ros-kilted-ros-workspace, ros-kilted-rosidl-typesupport-fastrtps-c, ros-kilted-rosidl-typesupport-fastrtps-cpp
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kilted-rmw-dds-common
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kilted-rcpputils, ros-kilted-rcutils, ros-kilted-rmw, ros-kilted-rmw-security-common, ros-kilted-rosidl-default-runtime, ros-kilted-rosidl-runtime-c, ros-kilted-rosidl-runtime-cpp, ros-kilted-ros-workspace
+Description: Define a common interface between DDS implementations of ROS middleware.
