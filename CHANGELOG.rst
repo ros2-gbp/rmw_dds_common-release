@@ -2,6 +2,15 @@
 Changelog for package rmw_dds_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.0.0 (2025-07-01)
+------------------
+* Update cmake requirements (`#80 <https://github.com/ros2/rmw_dds_common/issues/80>`_)
+* Remove deprecated security utilities (`#79 <https://github.com/ros2/rmw_dds_common/issues/79>`_)
+* Contributors: Alejandro Hernández Cordero, mosfet80
+
+3.3.0 (2025-04-25)
+------------------
+
 3.2.1 (2025-02-14)
 ------------------
 * Deprecated security methods (`#77 <https://github.com/ros2/rmw_dds_common/issues/77>`_)
