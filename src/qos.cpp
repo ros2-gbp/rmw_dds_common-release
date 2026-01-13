@@ -441,7 +441,8 @@ qos_profile_get_best_available_for_subscription(
   }
 
   if (RMW_QOS_POLICY_RELIABILITY_BEST_AVAILABLE == subscription_profile->reliability) {
-    if (number_of_reliable == publishers_info->size) {
+    // avoid incorrectly selecting RELIABLE when no publishers are discovered
+    if (publishers_info->size > 0 && number_of_reliable == publishers_info->size) {
       subscription_profile->reliability = RMW_QOS_POLICY_RELIABILITY_RELIABLE;
     } else {
       subscription_profile->reliability = RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT;
@@ -449,7 +450,8 @@ qos_profile_get_best_available_for_subscription(
   }
 
   if (RMW_QOS_POLICY_DURABILITY_BEST_AVAILABLE == subscription_profile->durability) {
-    if (number_of_transient_local == publishers_info->size) {
+    // avoid incorrectly selecting TRANSIENT_LOCAL when no publishers are discovered
+    if (publishers_info->size > 0 && number_of_transient_local == publishers_info->size) {
       subscription_profile->durability = RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL;
     } else {
       subscription_profile->durability = RMW_QOS_POLICY_DURABILITY_VOLATILE;
@@ -457,7 +459,8 @@ qos_profile_get_best_available_for_subscription(
   }
 
   if (RMW_QOS_POLICY_LIVELINESS_BEST_AVAILABLE == subscription_profile->liveliness) {
-    if (number_of_manual_by_topic == publishers_info->size) {
+    // avoid incorrectly selecting MANUAL_BY_TOPIC when no publishers are discovered
+    if (publishers_info->size > 0 && number_of_manual_by_topic == publishers_info->size) {
       subscription_profile->liveliness = RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_TOPIC;
     } else {
       subscription_profile->liveliness = RMW_QOS_POLICY_LIVELINESS_AUTOMATIC;
@@ -710,6 +713,50 @@ encode_type_hash_for_user_data_qos(
   }
   RCPPUTILS_SCOPE_EXIT(allocator.deallocate(type_hash_c_str, &allocator.state));
   string_out = "typehash=" + std::string(type_hash_c_str) + ";";
+  return RMW_RET_OK;
+}
+
+rmw_ret_t
+parse_sertype_hash_from_user_data(
+  const uint8_t * user_data,
+  size_t user_data_size,
+  rosidl_type_hash_t & type_hash_out)
+{
+  RMW_CHECK_ARGUMENT_FOR_NULL(user_data, RMW_RET_INVALID_ARGUMENT);
+  std::vector<uint8_t> udvec(user_data, user_data + user_data_size);
+  auto key_value = rmw::impl::cpp::parse_key_value(udvec);
+  auto typehash_it = key_value.find("sertypehash");
+  if (typehash_it == key_value.end()) {
+    type_hash_out = rosidl_get_zero_initialized_type_hash();
+    return RMW_RET_UNSUPPORTED;
+  }
+  std::string type_hash_str(typehash_it->second.begin(), typehash_it->second.end());
+  if (RCUTILS_RET_OK != rosidl_parse_type_hash_string(type_hash_str.c_str(), &type_hash_out)) {
+    return RMW_RET_ERROR;
+  }
+  return RMW_RET_OK;
+}
+
+rmw_ret_t
+encode_sertype_hash_for_user_data_qos(
+  const rosidl_type_hash_t & type_hash,
+  std::string & string_out)
+{
+  if (type_hash.version == ROSIDL_TYPE_HASH_VERSION_UNSET) {
+    string_out.clear();
+    return RMW_RET_OK;
+  }
+  auto allocator = rcutils_get_default_allocator();
+  char * type_hash_c_str = nullptr;
+  rcutils_ret_t stringify_ret = rosidl_stringify_type_hash(&type_hash, allocator, &type_hash_c_str);
+  if (RCUTILS_RET_BAD_ALLOC == stringify_ret) {
+    return RMW_RET_BAD_ALLOC;
+  }
+  if (RCUTILS_RET_OK != stringify_ret) {
+    return RMW_RET_ERROR;
+  }
+  RCPPUTILS_SCOPE_EXIT(allocator.deallocate(type_hash_c_str, &allocator.state));
+  string_out = "sertypehash=" + std::string(type_hash_c_str) + ";";
   return RMW_RET_OK;
 }
 
