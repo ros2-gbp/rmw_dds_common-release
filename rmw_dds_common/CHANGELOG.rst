@@ -2,32 +2,18 @@
 Changelog for package rmw_dds_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.0.0 (2026-01-16)
+5.0.0 (2026-01-16)
 ------------------
 
-4.0.3 (2026-01-13)
+3.2.3 (2026-01-13)
 ------------------
-* If no publishers discovered, make the best available QoS for subscription. (`#84 <https://github.com/ros2/rmw_dds_common/issues/84>`_)
-* Contributors: Tomoya Fujita
+* If no publishers discovered, make the best available QoS for subscription. (`#84 <https://github.com/ros2/rmw_dds_common/issues/84>`_) (`#85 <https://github.com/ros2/rmw_dds_common/issues/85>`_)
+* Contributors: mergify[bot]
 
-4.0.2 (2025-11-18)
+3.2.2 (2025-09-17)
 ------------------
-* Add get_clients_info_by_service and get_servers_info_by_service; introduce ServiceEntityInfo to handle service type hash in graph cache (`#82 <https://github.com/ros2/rmw_dds_common/issues/82>`_)
-* Contributors: Minju, Lee
-
-4.0.1 (2025-10-17)
-------------------
-* Remove deprecated GraphCache methods without type hash (`#83 <https://github.com/ros2/rmw_dds_common/issues/83>`_)
-* Contributors: Christophe Bedard
-
-4.0.0 (2025-07-01)
-------------------
-* Update cmake requirements (`#80 <https://github.com/ros2/rmw_dds_common/issues/80>`_)
-* Remove deprecated security utilities (`#79 <https://github.com/ros2/rmw_dds_common/issues/79>`_)
-* Contributors: Alejandro Hernández Cordero, mosfet80
-
-3.3.0 (2025-04-25)
-------------------
+* Update cmake requirements (`#80 <https://github.com/ros2/rmw_dds_common/issues/80>`_) (`#81 <https://github.com/ros2/rmw_dds_common/issues/81>`_)
+* Contributors: mergify[bot]
 
 3.2.1 (2025-02-14)
 ------------------
