@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 
 project(rmw_dds_common)
 
@@ -16,12 +16,14 @@ find_package(ament_cmake REQUIRED)
 find_package(rcpputils REQUIRED)
 find_package(rcutils REQUIRED)
 find_package(rmw REQUIRED)
+find_package(rmw_security_common REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(rosidl_runtime_c REQUIRED)
 
 ament_add_default_options()
 ament_export_dependencies(ament_cmake_core)
 ament_export_dependencies(rcutils)
+ament_export_dependencies(rmw_security_common)
 ament_export_dependencies(rmw)
 
 rosidl_generate_interfaces(
@@ -36,13 +38,13 @@ add_library(${PROJECT_NAME}_library
   src/gid_utils.cpp
   src/graph_cache.cpp
   src/qos.cpp
-  src/security.cpp
   src/time_utils.cpp)
 
 set_target_properties(${PROJECT_NAME}_library
   PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME}_library PUBLIC
   rcutils::rcutils
+  rmw_security_common::rmw_security_common_library
   rmw::rmw)
 target_link_libraries(${PROJECT_NAME}_library PRIVATE
   rcpputils::rcpputils
@@ -115,13 +117,6 @@ if(BUILD_TESTING)
   ament_add_gmock(test_time_utils test/test_time_utils.cpp)
   if(TARGET test_time_utils)
     target_link_libraries(test_time_utils ${PROJECT_NAME}_library)
-  endif()
-
-  ament_add_gmock(test_security test/test_security.cpp)
-  if(TARGET test_security)
-    target_link_libraries(test_security
-      ${PROJECT_NAME}_library
-      rcpputils::rcpputils)
   endif()
 
   add_performance_test(benchmark_graph_cache test/benchmark/benchmark_graph_cache.cpp)
