@@ -172,7 +172,7 @@ tracks:
       :{release_inc} --os-name rhel
     - git-bloom-generate -y rosdynrpm --prefix release/:{ros_distro} :{ros_distro}
       -i :{release_inc} --require-os fedora rhel
-    devel_branch: rolling
+    devel_branch: lyrical
     last_version: 6.0.0
     name: rmw_dds_common
     patches: null
